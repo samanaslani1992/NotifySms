@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">SmsNotify</string>
+    <string name="request_send_sms_permission">Request send SMS permission</string>
+    <string name="send_sms_permission">The send SMS permission is important for this app. Please grant the permission.</string>
+    <string name="send_sms_permission_required">"Send SMS permission required for this feature to be available."</string>
+    <string name="sms_sent">SMS sent</string>
+    <string name="message">Message</string>
+    <string name="send_sms">Send SMS</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="error_sending_sms">Error sending SMS</string>
 </resources>

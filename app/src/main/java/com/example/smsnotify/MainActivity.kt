@@ -14,7 +14,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.smsnotify.ui.theme.SmsNotifyTheme
-import com.example.smsnotify.view.PermissionsView
+import com.example.smsnotify.view.PermissionsScreen
 import com.example.smsnotify.view.SendSMSFormScreen
 
 class MainActivity : ComponentActivity() {
@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
 
-                        PermissionsView()
+                        PermissionsScreen()
                         SendSMSFormScreen()
                     }
                 }

@@ -17,9 +17,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.smsnotify.R
 import com.example.smsnotify.ui.theme.SmsNotifyTheme
+import com.example.smsnotify.viewModel.SendSmsViewModel
 
 @Composable
 fun SendSMSFormScreen() {
@@ -30,15 +34,15 @@ fun SendSMSFormScreen() {
 
 
     SendSMSFormContent(phoneNumber, message, onSubmitClick = {
-        sendSMS(
-            context = context,
+        sendSMS(context = context,
             phoneNumber = phoneNumber.value,
             message = message.value,
             success = {
 
                 phoneNumber.value = ""
                 message.value = ""
-                Toast.makeText(context, "SMS sent", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, context.getString(R.string.sms_sent), Toast.LENGTH_SHORT)
+                    .show()
             },
             error = {
                 Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
@@ -48,10 +52,10 @@ fun SendSMSFormScreen() {
 
 @Composable
 private fun SendSMSFormContent(
-    phoneNumber: MutableState<String>,
-    message: MutableState<String>,
-    onSubmitClick: () -> Unit = {}
+    phoneNumber: MutableState<String>, message: MutableState<String>, onSubmitClick: () -> Unit = {}
 ) {
+
+   // val viewModel: SendSmsViewModel = viewModel()
 
     Column(
         Modifier
@@ -61,30 +65,31 @@ private fun SendSMSFormContent(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
 
-        TextField(modifier = Modifier.fillMaxWidth(),
-            singleLine = true,
-            placeholder = {
-                Text(text = "Phone Number")
-            },
-            value = phoneNumber.value, onValueChange = {
-                phoneNumber.value = it
-            })
 
-        TextField(modifier = Modifier.fillMaxWidth(),
-            minLines = 5,
-            placeholder = {
-                Text(text = "Message")
-            },
-            value = message.value, onValueChange = {
-                message.value = it
-            })
+        MyTextField(phoneNumber, stringResource(R.string.phone_number), singleLine = true)
+        MyTextField(message, stringResource(R.string.message), false)
 
-        Button(modifier = Modifier.fillMaxWidth(), onClick = onSubmitClick) {
-
-            Text(text = "Send SMS")
+        Button(onClick = onSubmitClick) {
+            Text(text = stringResource(R.string.send_sms))
         }
 
     }
+}
+
+@Composable
+private fun MyTextField(
+    text: MutableState<String>, placeholder: String, singleLine: Boolean = false
+) {
+    TextField(modifier = Modifier.fillMaxWidth(),
+        singleLine = singleLine,
+        minLines = if (singleLine) 1 else 5,
+        placeholder = {
+            Text(text = placeholder)
+        },
+        value = text.value,
+        onValueChange = {
+            text.value = it
+        })
 }
 
 private fun sendSMS(
@@ -100,7 +105,7 @@ private fun sendSMS(
         smsManager.sendTextMessage(phoneNumber, null, message, null, null)
         success()
     } catch (e: Exception) {
-        error(e.message ?: "Error sending SMS")
+        error(e.message ?: context.getString(R.string.error_sending_sms))
     }
 
 }
