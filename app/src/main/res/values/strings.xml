@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">SmsNotify</string>
-    <string name="request_send_sms_permission">Request send SMS permission</string>
-    <string name="send_sms_permission">The send SMS permission is important for this app. Please grant the permission.</string>
-    <string name="send_sms_permission_required">"Send SMS permission required for this feature to be available."</string>
     <string name="sms_sent">SMS sent</string>
     <string name="message">Message</string>
     <string name="send_sms">Send SMS</string>
@@ -11,4 +8,5 @@
     <string name="notify_me_on_this_number">Notify me on this number</string>
     <string name="fake_number">+989123456789</string>
     <string name="hello_world">Hello World From Android :D</string>
+    <string name="allow">ALLOW</string>
 </resources>

@@ -56,6 +56,8 @@ private fun SendSMSContent(
     }
 }
 
+
+//TODO REFACTOR THIS
 private fun sendSMS(
     context: Context,
     phoneNumber: String,
