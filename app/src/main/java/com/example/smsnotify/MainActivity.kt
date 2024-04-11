@@ -13,9 +13,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.smsnotify.ui.theme.SmsNotifyTheme
-import com.example.smsnotify.view.PermissionsScreen
-import com.example.smsnotify.view.SendSMSFormScreen
+import com.example.smsnotify.presenter.theme.SmsNotifyTheme
+import com.example.smsnotify.presenter.screen.runtimePermission.PermissionsScreen
+import com.example.smsnotify.presenter.screen.sendSms.SendSMSFormScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

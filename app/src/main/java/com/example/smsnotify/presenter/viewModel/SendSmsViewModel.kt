@@ -1,4 +1,4 @@
-package com.example.smsnotify.viewModel
+package com.example.smsnotify.presenter.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,4 +1,4 @@
-package com.example.smsnotify.ui.theme
+package com.example.smsnotify.presenter.theme
 
 import androidx.compose.ui.graphics.Color
 
