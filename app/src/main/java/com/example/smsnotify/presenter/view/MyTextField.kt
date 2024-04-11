@@ -1,6 +1,7 @@
 package com.example.smsnotify.presenter.view
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -18,6 +19,9 @@ fun MyTextField(
         singleLine = singleLine,
         minLines = if (singleLine) 1 else 5,
         placeholder = {
+            Text(text = placeholder)
+        },
+        label = {
             Text(text = placeholder)
         },
         value = text.value,
