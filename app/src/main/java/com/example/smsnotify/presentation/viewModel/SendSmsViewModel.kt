@@ -1,14 +1,18 @@
-package com.example.smsnotify.presenter.viewModel
+package com.example.smsnotify.presentation.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.smsnotify.domain.model.SMS
+import com.example.smsnotify.domain.useCase.SmsUseCase
 
-class SendSmsViewModel : ViewModel() {
+class SendSmsViewModel(
+    private val smsUseCase: SmsUseCase
+) : ViewModel() {
 
     data class SendSmsState(
-        val phoneNumber: String = "",
-        val message: String = "",
+        val phoneNumber: String,
+        val message: String,
     )
 
     private val _formData = MutableLiveData(SendSmsState("", ""))
@@ -23,8 +27,11 @@ class SendSmsViewModel : ViewModel() {
     }
 
     fun validateForm(): Boolean {
-        return formData.value?.phoneNumber?.isNotEmpty() == true &&
-                formData.value?.message?.isNotEmpty() == true
+        return formData.value?.phoneNumber?.isNotEmpty() == true && formData.value?.message?.isNotEmpty() == true
 
+    }
+
+    fun sendSms(phoneNumber: String, message: String): Boolean {
+        return smsUseCase.sendSMS(SMS(phoneNumber, message))
     }
 }

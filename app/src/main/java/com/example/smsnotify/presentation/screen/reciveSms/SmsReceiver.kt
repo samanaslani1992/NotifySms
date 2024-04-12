@@ -1,4 +1,4 @@
-package com.example.smsnotify.presenter.screen.reciveSms
+package com.example.smsnotify.presentation.screen.reciveSms
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

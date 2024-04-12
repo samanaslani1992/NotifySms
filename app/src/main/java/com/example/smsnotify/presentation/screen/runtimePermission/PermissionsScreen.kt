@@ -1,4 +1,4 @@
-package com.example.smsnotify.presenter.screen.runtimePermission
+package com.example.smsnotify.presentation.screen.runtimePermission
 
 import android.Manifest.permission.POST_NOTIFICATIONS
 import android.Manifest.permission.READ_SMS
@@ -20,9 +20,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.smsnotify.R
-import com.example.smsnotify.presenter.theme.SmsNotifyTheme
-import com.example.smsnotify.presenter.view.ColumnPage
-import com.example.smsnotify.presenter.view.MyButton
+import com.example.smsnotify.presentation.theme.SmsNotifyTheme
+import com.example.smsnotify.presentation.view.ColumnPage
+import com.example.smsnotify.presentation.view.MyButton
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState

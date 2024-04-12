@@ -1,4 +1,4 @@
-package com.example.smsnotify.presenter.view
+package com.example.smsnotify.presentation.view
 
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding

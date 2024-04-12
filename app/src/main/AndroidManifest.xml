@@ -22,7 +22,7 @@
         android:theme="@style/Theme.SmsNotify"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".presentation.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.SmsNotify">
             <intent-filter>
@@ -32,7 +32,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".presenter.screen.reciveSms.SmsReceiver"
+        <receiver android:name=".presentation.screen.reciveSms.SmsReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />

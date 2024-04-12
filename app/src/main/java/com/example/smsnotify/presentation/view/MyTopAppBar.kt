@@ -1,4 +1,4 @@
-package com.example.smsnotify.presenter.view
+package com.example.smsnotify.presentation.view
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme

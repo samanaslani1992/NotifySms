@@ -1,4 +1,4 @@
-package com.example.smsnotify.presenter.screen.reciveSms
+package com.example.smsnotify.presentation.screen.reciveSms
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -8,10 +8,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.smsnotify.R
-import com.example.smsnotify.presenter.theme.SmsNotifyTheme
-import com.example.smsnotify.presenter.view.ColumnPage
-import com.example.smsnotify.presenter.view.MyButton
-import com.example.smsnotify.presenter.view.MyTextField
+import com.example.smsnotify.presentation.theme.SmsNotifyTheme
+import com.example.smsnotify.presentation.view.ColumnPage
+import com.example.smsnotify.presentation.view.MyButton
+import com.example.smsnotify.presentation.view.MyTextField
 
 @Composable
 fun ReceiveSMSScreen() {

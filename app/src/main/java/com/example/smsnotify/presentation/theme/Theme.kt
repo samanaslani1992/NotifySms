@@ -1,4 +1,4 @@
-package com.example.smsnotify.presenter.theme
+package com.example.smsnotify.presentation.theme
 
 import android.app.Activity
 import android.os.Build

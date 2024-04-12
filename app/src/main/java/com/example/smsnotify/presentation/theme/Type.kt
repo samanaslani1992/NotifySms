@@ -1,4 +1,4 @@
-package com.example.smsnotify.presenter.theme
+package com.example.smsnotify.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

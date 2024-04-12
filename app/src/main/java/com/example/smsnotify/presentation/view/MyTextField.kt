@@ -1,7 +1,6 @@
-package com.example.smsnotify.presenter.view
+package com.example.smsnotify.presentation.view
 
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
