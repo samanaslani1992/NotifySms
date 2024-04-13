@@ -19,7 +19,7 @@ fun ReceiveSMSScreen() {
     val context = LocalContext.current
 
 
-    val phoneNumber = remember { mutableStateOf(context.getString(R.string.fake_number)) }
+    val phoneNumber = remember { mutableStateOf(context.getString(R.string.fake_phone_number)) }
 
 
     ReceiveSMSContent(

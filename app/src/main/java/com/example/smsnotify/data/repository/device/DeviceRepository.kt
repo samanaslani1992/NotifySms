@@ -9,5 +9,5 @@ interface DeviceRepository {
         onError: (String) -> Unit
     )
 
-    fun receiveSms(onReceive: (phoneNumber: String, message: String) -> Unit)
+   // fun receiveSms(onReceive: (phoneNumber: String, message: String) -> Unit)
 }

@@ -24,7 +24,7 @@ class DeviceRepositoryImpl(val app: App) : DeviceRepository {
 
     }
 
-    override fun receiveSms(onReceive: (phoneNumber: String, message: String) -> Unit) {
+  /*  override fun receiveSms(onReceive: (phoneNumber: String, message: String) -> Unit) {
 
-    }
+    }*/
 }

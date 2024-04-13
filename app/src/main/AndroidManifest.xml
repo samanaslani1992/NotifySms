@@ -34,7 +34,7 @@
         </activity>
 
         <receiver
-            android:name=".data.utils.SmsReceiver"
+            android:name=".presentation.SmsReceiver"
             android:exported="true"
             android:permission="android.permission.BROADCAST_SMS">
             <intent-filter>

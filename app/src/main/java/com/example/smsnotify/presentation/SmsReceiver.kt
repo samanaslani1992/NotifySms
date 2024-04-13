@@ -1,14 +1,19 @@
-package com.example.smsnotify.data.utils
+package com.example.smsnotify.presentation
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.telephony.SmsMessage
+import com.example.smsnotify.domain.useCase.SmsUseCase
 import com.example.smsnotify.utils.showNotification
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class SmsReceiver : BroadcastReceiver() {
-
+    @Inject
+    lateinit var smsUseCase: SmsUseCase
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action == "android.provider.Telephony.SMS_RECEIVED") {
             val messages = getSmsMessages(intent.extras)
@@ -17,7 +22,9 @@ class SmsReceiver : BroadcastReceiver() {
             if (firstMessage != null) {
                 val sender = firstMessage.originatingAddress ?: ""
                 val messageBody = firstMessage.messageBody
-                showNotification(context, sender, messageBody)
+
+                if (smsUseCase.smsReceivedValidation(sender))
+                    showNotification(context, sender, messageBody)
             }
         }
     }

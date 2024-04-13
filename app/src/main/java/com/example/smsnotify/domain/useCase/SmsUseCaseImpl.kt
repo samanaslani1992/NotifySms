@@ -9,14 +9,17 @@ class SmsUseCaseImpl(
     val localStorageRepository: LocalStorageRepository,
 ) : SmsUseCase {
     override fun sendSMS(
-        sms: SMS,
-        onSuccess: (String) -> Unit,
-        onError: (String) -> Unit
+        sms: SMS, onSuccess: (String) -> Unit, onError: (String) -> Unit
     ) {
 
         deviceRepository.sendSms(sms.phoneNumber, sms.message, onSuccess, onError)
     }
 
+    override fun smsReceivedValidation(phoneNumber: String): Boolean {
+
+        return phoneNumber == localStorageRepository.getPhoneNumber()
+    }
+    /*
     override fun receiveSMS(onReceive: (sms: SMS) -> Unit) {
 
         return deviceRepository.receiveSms(onReceive = { phoneNumber, message ->
@@ -24,7 +27,7 @@ class SmsUseCaseImpl(
             if (phoneNumber == localStorageRepository.getPhoneNumber())
                 onReceive(SMS(phoneNumber, message))
         })
-    }
+    }*/
 
     override fun savePhoneNumber(phoneNumber: String) {
         localStorageRepository.savePhoneNumber(phoneNumber)
