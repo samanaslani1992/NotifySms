@@ -5,13 +5,17 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.telephony.SmsMessage
+import android.util.Log
+import com.example.smsnotify.domain.model.SMS
 import com.example.smsnotify.domain.useCase.SmsUseCase
 import com.example.smsnotify.utils.showNotification
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+
 @AndroidEntryPoint
 class SmsReceiver : BroadcastReceiver() {
+
     @Inject
     lateinit var smsUseCase: SmsUseCase
     override fun onReceive(context: Context, intent: Intent) {
@@ -20,11 +24,14 @@ class SmsReceiver : BroadcastReceiver() {
             val firstMessage = messages.firstOrNull()
 
             if (firstMessage != null) {
-                val sender = firstMessage.originatingAddress ?: ""
-                val messageBody = firstMessage.messageBody
+                val senderPhoneNumber = firstMessage.originatingAddress ?: ""
+                val message = firstMessage.messageBody
 
-                if (smsUseCase.smsReceivedValidation(sender))
-                    showNotification(context, sender, messageBody)
+                smsUseCase.smsReceive(SMS(senderPhoneNumber, message), onReceive = {
+
+                    Log.d("@@@@@@@","@@@@@@@@@@@@@")
+                    showNotification(context, senderPhoneNumber, message)
+                })
             }
         }
     }

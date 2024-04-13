@@ -1,5 +1,6 @@
 package com.example.smsnotify.domain.useCase
 
+import android.util.Log
 import com.example.smsnotify.data.repository.LocalStorage.LocalStorageRepository
 import com.example.smsnotify.data.repository.device.DeviceRepository
 import com.example.smsnotify.domain.model.SMS
@@ -15,19 +16,14 @@ class SmsUseCaseImpl(
         deviceRepository.sendSms(sms.phoneNumber, sms.message, onSuccess, onError)
     }
 
-    override fun smsReceivedValidation(phoneNumber: String): Boolean {
+    override fun smsReceive(receivedSms: SMS, onReceive: () -> Unit) {
 
-        return phoneNumber == localStorageRepository.getPhoneNumber()
+
+        if (receivedSms.phoneNumber == localStorageRepository.getPhoneNumber())
+            onReceive()
+
     }
-    /*
-    override fun receiveSMS(onReceive: (sms: SMS) -> Unit) {
 
-        return deviceRepository.receiveSms(onReceive = { phoneNumber, message ->
-
-            if (phoneNumber == localStorageRepository.getPhoneNumber())
-                onReceive(SMS(phoneNumber, message))
-        })
-    }*/
 
     override fun savePhoneNumber(phoneNumber: String) {
         localStorageRepository.savePhoneNumber(phoneNumber)

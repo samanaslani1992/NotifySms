@@ -9,4 +9,6 @@
     <string name="fake_phone_number">+989123456789</string>
     <string name="hello_world">Hello World From Android :D</string>
     <string name="allow">ALLOW</string>
+    <string name="sms_notify_channel">SMS Notify Channel</string>
+    <string name="channel_for_sms_notifications">Channel for SMS notifications</string>
 </resources>

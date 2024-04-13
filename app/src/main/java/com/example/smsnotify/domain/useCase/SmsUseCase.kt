@@ -6,9 +6,8 @@ interface SmsUseCase {
 
     fun sendSMS(sms: SMS, onSuccess: (String) -> Unit, onError: (String) -> Unit)
 
-    fun smsReceivedValidation(phoneNumber: String): Boolean
+    fun smsReceive(receivedSms: SMS, onReceive: ( ) -> Unit)
 
-    // fun receiveSMS(onReceive: (sms: SMS) -> Unit)
     fun savePhoneNumber(phoneNumber: String)
     fun getPhoneNumber(): String
 
