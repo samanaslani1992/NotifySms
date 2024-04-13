@@ -1,80 +1,77 @@
 package com.example.smsnotify.presentation.screen.sendSms
 
-import android.content.Context
-import android.telephony.SmsManager
 import android.widget.Toast
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.smsnotify.R
+import com.example.smsnotify.domain.model.SMS
 import com.example.smsnotify.presentation.theme.SmsNotifyTheme
 import com.example.smsnotify.presentation.view.ColumnPage
 import com.example.smsnotify.presentation.view.MyButton
 import com.example.smsnotify.presentation.view.MyTextField
+import com.example.smsnotify.presentation.viewModel.SendSmsViewModel
 
 @Composable
 fun SendSMSScreen() {
     val context = LocalContext.current
 
-    val phoneNumber = remember { mutableStateOf(context.getString(R.string.fake_number)) }
-    val message = remember { mutableStateOf(context.getString(R.string.hello_world)) }
 
+    val sendSmsViewModel = hiltViewModel<SendSmsViewModel>()
+    val sendSmsUiState = sendSmsViewModel.uiState.collectAsState()
 
-    SendSMSContent(phoneNumber, message, onSubmitClick = {
-        sendSMS(context = context,
-            phoneNumber = phoneNumber.value,
-            message = message.value,
-            success = {
-
-                phoneNumber.value = ""
-                message.value = ""
-                Toast.makeText(context, context.getString(R.string.sms_sent), Toast.LENGTH_SHORT)
-                    .show()
-            },
-            error = {
-                Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
-            })
-    })
+    SendSMSContent(
+        uiState = sendSmsUiState,
+        onPhoneNumberChange = {
+            sendSmsViewModel.updatePhoneNumber(it)
+        },
+        onMessageChange = { sendSmsViewModel.updateMessage(it) },
+        onSubmitClick = {
+            sendSmsViewModel.sendSms(
+                phoneNumber = sendSmsUiState.value.phoneNumber,
+                message = sendSmsUiState.value.message,
+                onSuccess = {
+                    Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+                },
+                onError = {
+                    Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+                }
+            )
+        })
 }
 
 @Composable
 private fun SendSMSContent(
-    phoneNumber: MutableState<String>,
-    message: MutableState<String>,
-    onSubmitClick: () -> Unit = {}
+    uiState: State<SMS>,
+    onPhoneNumberChange: (phoneNumber: String) -> Unit,
+    onMessageChange: (message: String) -> Unit,
+    onSubmitClick: () -> Unit
 ) {
     ColumnPage {
 
-        MyTextField(phoneNumber, stringResource(R.string.phone_number), singleLine = true)
-        MyTextField(message, stringResource(R.string.message), false)
-        MyButton(title = stringResource(R.string.send_sms), onClick = onSubmitClick)
+        MyTextField(
+            initText = uiState.value.phoneNumber,
+            placeholder = stringResource(R.string.phone_number),
+            singleLine = true,
+            onValueChange = onPhoneNumberChange
+        )
+        MyTextField(
+            initText = uiState.value.message,
+            placeholder = stringResource(R.string.message),
+            onValueChange = onMessageChange
+        )
+        MyButton(
+            title = stringResource(R.string.send_sms),
+            onClick = onSubmitClick
+        )
 
     }
 }
 
-
-//TODO REFACTOR THIS
-private fun sendSMS(
-    context: Context,
-    phoneNumber: String,
-    message: String,
-    success: () -> Unit,
-    error: (String) -> Unit
-) {
-    try {
-        val smsManager = context.getSystemService(SmsManager::class.java)
-
-        smsManager.sendTextMessage(phoneNumber, null, message, null, null)
-        success()
-    } catch (e: Exception) {
-        error(e.message ?: context.getString(R.string.error_sending_sms))
-    }
-
-}
 
 @Composable
 @Preview
@@ -82,6 +79,5 @@ fun SendSMSFormPreview() {
 
     SmsNotifyTheme {
         SendSMSScreen()
-
     }
 }

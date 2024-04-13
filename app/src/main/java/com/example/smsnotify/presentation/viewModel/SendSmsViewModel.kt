@@ -1,37 +1,37 @@
 package com.example.smsnotify.presentation.viewModel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.smsnotify.domain.model.SMS
 import com.example.smsnotify.domain.useCase.SmsUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import javax.inject.Inject
 
-class SendSmsViewModel(
+@HiltViewModel
+class SendSmsViewModel @Inject constructor(
     private val smsUseCase: SmsUseCase
 ) : ViewModel() {
 
-    data class SendSmsState(
-        val phoneNumber: String,
-        val message: String,
-    )
-
-    private val _formData = MutableLiveData(SendSmsState("", ""))
-    val formData: LiveData<SendSmsState> = _formData
+    private val _uiState = MutableStateFlow(SMS("+989186565621", "Hello World !"))
+    val uiState: StateFlow<SMS> = _uiState.asStateFlow()
 
     fun updatePhoneNumber(phoneNumber: String) {
-        _formData.value = _formData.value?.copy(phoneNumber = phoneNumber)
+        _uiState.value = _uiState.value.copy(phoneNumber = phoneNumber)
     }
 
     fun updateMessage(message: String) {
-        _formData.value = _formData.value?.copy(message = message)
+        _uiState.value = _uiState.value.copy(message = message)
     }
 
-    fun validateForm(): Boolean {
-        return formData.value?.phoneNumber?.isNotEmpty() == true && formData.value?.message?.isNotEmpty() == true
 
-    }
-
-    fun sendSms(phoneNumber: String, message: String): Boolean {
-        return smsUseCase.sendSMS(SMS(phoneNumber, message))
+    fun sendSms(
+        phoneNumber: String,
+        message: String,
+        onSuccess: (String) -> Unit,
+        onError: (String) -> Unit
+    ) {
+        return smsUseCase.sendSMS(SMS(phoneNumber, message), onSuccess, onError)
     }
 }

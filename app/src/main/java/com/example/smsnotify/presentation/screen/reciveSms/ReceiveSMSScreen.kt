@@ -15,7 +15,9 @@ import com.example.smsnotify.presentation.view.MyTextField
 
 @Composable
 fun ReceiveSMSScreen() {
+
     val context = LocalContext.current
+
 
     val phoneNumber = remember { mutableStateOf(context.getString(R.string.fake_number)) }
 
@@ -35,7 +37,7 @@ private fun ReceiveSMSContent(
 ) {
     ColumnPage {
 
-        MyTextField(phoneNumber, stringResource(R.string.phone_number), singleLine = true)
+        MyTextField(phoneNumber.value, stringResource(R.string.phone_number), singleLine = true)
         MyButton(title = stringResource(R.string.notify_me_on_this_number), onClick = onSubmitClick)
 
     }

@@ -1,4 +1,4 @@
-package com.example.smsnotify.data.repository
+package com.example.smsnotify.data.repository.LocalStorage
 
 interface LocalStorageRepository {
     fun savePhoneNumber(phoneNumber: String)
