@@ -1,6 +1,8 @@
 package com.example.smsnotify.presentation.viewModel
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import com.example.smsnotify.R
 import com.example.smsnotify.domain.model.SMS
 import com.example.smsnotify.domain.useCase.SmsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -11,10 +13,17 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SendSmsViewModel @Inject constructor(
-    private val smsUseCase: SmsUseCase
-) : ViewModel() {
+    private val smsUseCase: SmsUseCase,
+    var context: Application
+) : AndroidViewModel(application = context) {
 
-    private val _uiState = MutableStateFlow(SMS("+989186565621", "Hello World !"))
+    private val _uiState =
+        MutableStateFlow(
+            SMS(
+                context.getString(R.string.phone_number),
+                context.getString(R.string.hello_world)
+            )
+        )
     val uiState: StateFlow<SMS> = _uiState.asStateFlow()
 
     fun updatePhoneNumber(phoneNumber: String) {

@@ -33,5 +33,7 @@ class SmsUseCaseImpl(
         localStorageRepository.savePhoneNumber(phoneNumber)
     }
 
-
+    override fun getPhoneNumber(): String {
+        return localStorageRepository.getPhoneNumber()
+    }
 }

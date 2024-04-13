@@ -10,6 +10,7 @@ interface SmsUseCase {
 
     // fun receiveSMS(onReceive: (sms: SMS) -> Unit)
     fun savePhoneNumber(phoneNumber: String)
+    fun getPhoneNumber(): String
 
 
 }
